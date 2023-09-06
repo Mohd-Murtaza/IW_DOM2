@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Masai School</h1>
+    <button onClick="changeRed()">Change Text color to red</button>
+    <button onClick="changeYellow()">Change Text color to yellow</button>
+  </body>
+</html>
+
+<script>
+let heading=document.querySelector("h1")
+let btn=document.querySelectorAll("button")
+btn.forEach(ele=>
+{
+    ele.style.background="black";
+    ele.style.color="aquamarine";
+    ele.style.borderRadius="20px";
+    ele.style.boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
+}) 
+  function changeRed(){
+    // change text color of h1 to red
+    heading.style.color="red";
+  }
+
+  function changeYellow(){
+    // change text color of h1 to yellow
+    heading.style.color="yellow";
+  }
+</script>
