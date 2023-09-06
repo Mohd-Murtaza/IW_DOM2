@@ -1,0 +1,169 @@
+<html>
+    <head>
+        <title>Masai Calculator</title>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .heading{
+                text-align: center;
+                font-size: 45px;
+                color: darkcyan;
+                font-weight: 900;
+                margin-top: 30px;
+            }
+            #caculator{
+                width: 350px;
+                height: 400px;
+                margin: auto;
+                padding-top: 40px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+            .input{
+                width: 280px;
+                height: 1.6cm;
+                text-align: center;
+                border-radius: 5px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                margin: auto;
+            }
+            .result{
+                background-color: rgb(242, 242, 242);
+                border-bottom: 1px solid black;
+                margin: 0%;
+                line-height: 1.6cm;
+                font-size: 24px
+            }
+            .buttons{
+                width: 280px;
+                margin: auto;
+                display: grid;
+                margin-top: 15px;
+                grid-template-columns: repeat(4, 60px);
+                grid-template-rows: repeat(4, 60px);
+                gap: 10px;
+                justify-content: space-evenly;
+            }
+            .buttons>div{
+                font-size: 18px;
+                font-weight: 800;
+                color: black;
+                border-radius: 8px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                text-align: center;
+                padding: 15px;
+            }
+            .buttons > div:nth-child(4),
+            .buttons > div:nth-child(8),
+            .buttons > div:nth-child(12),
+            .buttons > div:nth-child(15),
+            .buttons > div:nth-child(16){
+                background-color: black;
+                color: white;
+            }
+            .buttons > div:nth-child(13){
+                background-color: red;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="heading">Masai Calculator</h1>
+        <div id="caculator">
+            <div class="input">
+                <p class="result">0</p>
+            </div>
+            <div class="buttons">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>+</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div> 
+                <div>-</div>
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+                <div>x</div>
+                <div>C</div>
+                <div>0</div>
+                <div>=</div>
+                <div>/</div>
+            </div> 
+        </div>
+    </body>
+    <script>
+        var result=document.querySelector(".result");
+        var btn=document.querySelectorAll(".buttons>div");
+        var firstNumber="";
+        var secondNumber="";
+        var operator="";
+    function calculation(firstNumber, secondNumber, operator) {
+        switch (operator){
+                    case "+":
+                        return Number(firstNumber) + Number(secondNumber);
+                    case "-":
+                        return Number(firstNumber) - Number(secondNumber);
+                    case "x":
+                        return  Number(firstNumber) * Number(secondNumber);
+                    case "/":
+                        return Number(firstNumber) / Number(secondNumber)
+                }
+    }
+        btn.forEach((ele) =>
+        {
+            if(ele.innerText=="C")
+            {
+                ele.addEventListener("click", function()
+                {
+                    firstNumber="";
+                    secondNumber="";
+                    operator="";
+                    result.innerText="";
+                })
+            }
+            else if(ele.innerText=="=")
+            {
+                ele.addEventListener("click", function()
+                {
+                    result.innerText=calculation(firstNumber, secondNumber,operator[operator.length-1]);
+                    firstNumber= "";
+                    secondNumber="";
+                    if(firstNumber=="" && secondNumber=="" && operator=="")
+                    {
+                        result.innerText="Please press number first";
+                    }
+                })
+            }
+            else if(ele.innerText=="+" || ele.innerText=="-" || ele.innerText=="x" || ele.innerText=="/")
+            {
+                ele.addEventListener("click", function()
+                {
+                    operator=ele.innerText;
+                    result.innerText=operator;
+                    if(secondNumber !== ""){
+                        firstNumber = calculation(firstNumber, secondNumber,operator[operator.length-2]);
+                        secondNumber="";
+                    }
+                })
+            }
+            else
+            {
+                ele.addEventListener("click", function()
+                {
+                    if(operator == "")
+                    {
+                        firstNumber+=ele.innerText;
+                        result.innerText=firstNumber;
+                    }
+                    else
+                    {
+                        secondNumber+=ele.innerText;
+                        result.innerText=secondNumber
+                    }
+                })
+            }
+        })
+    </script>
+</html>
